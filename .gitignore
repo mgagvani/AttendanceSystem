@@ -1,3 +1,7 @@
+# Our files
+Face_Identification/**/*.jpg
+Face_Identification/**/*.jpg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
