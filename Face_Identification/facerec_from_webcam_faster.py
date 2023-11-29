@@ -1,6 +1,8 @@
 import face_recognition
 import cv2
 import numpy as np
+import glob
+import os
 
 # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
 # other example, but it includes some basic performance tweaks to make things run a lot faster:
@@ -13,24 +15,69 @@ import numpy as np
 
 # Get a reference to webcam #0 (the default one)
 video_capture = cv2.VideoCapture(0)
+'''
+# find all the folders in the test2 folder
 
+# Structure of people_images_dict:
+# {
+#     "person1": [image1, image2, image3, ...],
+#     "person2": [image1, image2, image3, ...],
+#     ...
+# }
+people_images_dict = {}
+for folder in glob.glob("test2/*"):
+    # get the name of the person
+    name = folder.split(os.path.sep)[-1]    
+    # get all the images of the person
+    images = []
+    for image in glob.glob(folder + "/*"):
+        images.append(face_recognition.load_image_file(image))
+    # add the images to the dictionary
+    people_images_dict[name] = images
+
+# Structure of people_encodings_dict:
+# {
+#     "person1": [encoding1, encoding2, encoding3, ...],
+#     "person2": [encoding1, encoding2, encoding3, ...],
+#     ...
+# }
+people_encodings_dict = {}
+for name, images in people_images_dict.items():
+    # get the encodings of 1 image
+    encodings = face_recognition.face_encodings(images[0])
+    # for image in images:
+    #     encoding = face_recognition.face_encodings(image)
+    #     print(type(encoding), len(encoding))
+    #     encodings.append(encoding)
+    # # add the encodings to the dictionary
+    people_encodings_dict[name] = encodings[0]
+
+known_face_encodings = []
+known_face_names = []
+for name, encodings in people_encodings_dict.items():
+    for encoding in encodings:
+        known_face_encodings.append(encoding)
+        known_face_names.append(name)
+
+'''
 # Load a sample picture and learn how to recognize it.
-obama_image = face_recognition.load_image_file("test1/obama.jpg")
-obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
+manav_image = face_recognition.load_image_file("test2/manav_gagvani/manav_gagvani_1.jpg")
+manav_face_encoding = face_recognition.face_encodings(manav_image)[0]
 
 # Load a second sample picture and learn how to recognize it.
-biden_image = face_recognition.load_image_file("test1/biden.jpg")
-biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
+tanvi_image = face_recognition.load_image_file("test2/tanvi_pedireddy//tanvi_pedireddy_3.jpg")
+tanvi_face_encoding = face_recognition.face_encodings(tanvi_image)[0]
 
 # Create arrays of known face encodings and their names
 known_face_encodings = [
-    obama_face_encoding,
-    biden_face_encoding
+    manav_face_encoding,
+    tanvi_face_encoding
 ]
 known_face_names = [
-    "Barack Obama",
-    "Joe Biden"
+    "Manav Gagvani",
+    "Tanvi Pedireddy"
 ]
+
 
 # Initialize some variables
 face_locations = []
