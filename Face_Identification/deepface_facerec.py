@@ -46,7 +46,7 @@ def main():
             face_size_threshold = 100,
         )
     
-    for i in range(10):
+    while True:
         t0 = time.perf_counter()
         recognitions = next(face)
         t1 = time.perf_counter()

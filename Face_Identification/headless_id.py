@@ -41,8 +41,14 @@ def streamed_id_no_preview(
 
     cap = cv2.VideoCapture(source)  # webcam
 
+    frame_skip = 10  # every 10 frames will be processed
+
     while True:
         _, img = cap.read()
+
+        if frame_skip % 10 != 0:
+            frame_skip += 1
+            continue
 
         # T0 - Camera read
         T0 = time.perf_counter()
@@ -84,9 +90,11 @@ def streamed_id_no_preview(
 
         # T1 - Face detection
         T1 = time.perf_counter()
-        # print(f"Face detection took {T1 - T0} seconds")
+        print(f"Face detection took {T1 - T0} seconds. Found {len(faces)} faces")
+        print("faces:", faces)
 
         # for each face, if bigger than threshold, predict
+        labels = []
         for i, face in enumerate(faces):
             x, y, w, h = face
 
@@ -117,7 +125,9 @@ def streamed_id_no_preview(
                     if df.shape[0] > 0:
                         candidate = df.iloc[0]
                         label = candidate["identity"]
-                        yield label
+                        labels.append(label)
+
+            yield labels    
 
                 
     cap.release()
