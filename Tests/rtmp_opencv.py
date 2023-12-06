@@ -3,7 +3,8 @@ import cv2
   
   
 # define a video capture object 
-vid = cv2.VideoCapture(1) 
+rmtp = "rtmp://127.0.0.1/live/SyWPfOiBa"
+vid = cv2.VideoCapture(rmtp) 
   
 while(True): 
       
