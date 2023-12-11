@@ -19,8 +19,8 @@ def main():
     # See https://github.com/serengil/deepface/blob/master/deepface/commons/realtime.py
     # for implementation of stream()
 
-    # rtmp = "rtmp://127.0.0.1/live/SyWPfOiBa"
-    rtmp = "rtmp://172.20.10.3/live/SyWPfOiBa"
+    rtmp = "rtmp://127.0.0.1/live/SyWPfOiBa"
+    #rtmp = "rtmp://172.20.10.3/live/SyWPfOiBa"
     
     '''
     analysis(
@@ -38,12 +38,13 @@ def main():
     )
     '''
     face = streamed_id_no_preview(
-            db_path="test2",
+            #db_path="test2",
+            db_path='/Users/pranavv/Library/CloudStorage/GoogleDrive-1823210@fcpsschools.net/My Drive/Machine Learning/Facial Recognition/AttendanceSystem/Face_Identification/test2',
             model_name = MODELS[6], # ArcFace
             detector_backend = 'opencv',
             source=rtmp,
             distance_metric = 'cosine',
-            face_size_threshold = 100,
+            face_size_threshold = 50,
         )
     
     while True:
