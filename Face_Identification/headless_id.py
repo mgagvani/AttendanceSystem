@@ -41,18 +41,17 @@ def streamed_id_no_preview(
 
     cap = cv2.VideoCapture(source)  # webcam
 
-    frame_skip = 10  # every 10 frames will be processed
+    frame_skip = 9  # every 10 frames will be processed
 
     while True:
         _, img = cap.read()
 
-        if frame_skip % 10 != 0:
-            frame_skip += 1
-            continue
+        frame_skip += 1
+        if frame_skip % 10 != 0: continue
 
         # T0 - Camera read
         T0 = time.perf_counter()
-
+        if not _: break
         if img is None:
             break
 
