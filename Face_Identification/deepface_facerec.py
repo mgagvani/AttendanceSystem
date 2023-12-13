@@ -21,7 +21,7 @@ def main():
     # See https://github.com/serengil/deepface/blob/master/deepface/commons/realtime.py
     # for implementation of stream()
 
-    rtmp = "rtmp://127.0.0.1/live/r1CJcyHUT"
+    rtmp = "rtmp://127.0.0.1/live/S1v7MEvL6"
     #rtmp = "rtmp://172.20.10.3/live/SyWPfOiBa"
     
     '''
@@ -41,12 +41,12 @@ def main():
     '''
     face = streamed_id_no_preview(
             #db_path="test2",
-            # db_path='/Users/pranavv/Library/CloudStorage/GoogleDrive-1823210@fcpsschools.net/My Drive/Machine Learning/Facial Recognition/AttendanceSystem/Face_Identification/test2',
-            db_path = '/Users/shreyandey/Documents/Grade12/ML/AttendanceSystem/Face_Identification/test2',
+            db_path='/Users/pranavv/Library/CloudStorage/GoogleDrive-1823210@fcpsschools.net/My Drive/Machine Learning/Facial Recognition/AttendanceSystem/Face_Identification/test2',
+            #db_path = '/Users/shreyandey/Documents/Grade12/ML/AttendanceSystem/Face_Identification/test2',
             model_name = MODELS[2],
             detector_backend = 'retinaface',
             # source='/Users/shreyandey/Documents/Grade12/ML/AttendanceSystem/Face_Identificationd/face_test.MOV',
-            source = 0, # web cam
+            source = rtmp, # web cam
             distance_metric = 'euclidean_l2',
             face_size_threshold = 50,
         )
@@ -55,11 +55,11 @@ def main():
     names = {'Akshat Alok', 'Samarth Bhargav', 'Preston Brown', 'Jesse Choe', 'Santiago Criado', 'Tejesh Dandu', 'Shreyan Dey', 'Mihika Dusad', 'Manav Gagvani', 'Om Gole', 'Rohan Kalahasty', 'Darren Kao', 'Dev Kodre', 'Pranav Kuppa', 'Grace Liu', 'Krish Malik', 'Lucas Marschoun', 'Lakshmi Sritan Motati', 'Vishal Nandakumar', 'Matthew Palamarchuk', 'Pranav Panicker', 'Tanvi Pedireddi', 'Ashwin Pulla', 'Daniel Qiu', 'Abhisheik Sharma', 'Ayaan Siddiqui', 'Raghav Sriram', 'Pranav Vadde', 'Akash Wudali'}
     facesDct = {name:False for name in names}
 
-    # output_path = '/Users/pranavv/Library/CloudStorage/GoogleDrive-1823210@fcpsschools.net/My Drive/Machine Learning/Facial Recognition/AttendanceSystem/Face_Identification/identified_people.txt'
-    output_path = '/Users/shreyandey/Documents/Grade12/ML/AttendanceSystem/Face_Identification/identified_people.json'
+    output_path = '/Users/pranavv/Library/CloudStorage/GoogleDrive-1823210@fcpsschools.net/My Drive/Machine Learning/Facial Recognition/AttendanceSystem/Face_Identification/identified_people.json'
+    #output_path = '/Users/shreyandey/Documents/Grade12/ML/AttendanceSystem/Face_Identification/identified_people.json'
     
     # try:
-    #     with open(output_path, 'w') as f: pass
+    #     with open(output_path, 'x') as f: pass
     # except FileExistsError: pass
     json_object_prelim = json.dumps(facesDct, indent=4)
     with open(output_path, 'w') as f:
